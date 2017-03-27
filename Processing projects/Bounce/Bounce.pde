@@ -128,9 +128,9 @@ void draw() {
   if (mousePressed) println(mouseX, mouseY);
 
 
-  //Speed PowerUp
-  sPowerUp();
-  sPowerUpControl();
+  ////Speed PowerUp
+  //sPowerUp();
+  //sPowerUpControl();
 }
 
 void drawField() {
