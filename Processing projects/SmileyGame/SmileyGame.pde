@@ -49,6 +49,7 @@ void draw() {
   smileyGravity();
   smileyMoving();
   smileyPoints();
+  highScore();
 
 }
 void smileyControl() {
@@ -146,10 +147,14 @@ boolean collision(float aX,float aY,float bX,float bY,float bW,float bH){
 }
 void youDied(){
  // enemyMovementSpeed = 0;
+ if(smileyPoints > highscore)highscore = smileyPoints;
   smileyDead = true;
   fill(#FF0000);
   textSize(50);
   text("The smiley has been Slain",50,200);
+  fill(#FF0000);
+  textSize(25);
+  text("Press 'R' to try again",300,450);
 }
 void smileyPoints(){
   fill(0);
@@ -157,7 +162,9 @@ void smileyPoints(){
   text("Smiley Points: "+smileyPoints,50,450);
 }
 void highScore(){
-
+  fill(0);
+  textSize(25);
+  text("Highscore: "+highscore,600,450);
 }
 void keyReleased(){
  if(key == ' ' && smileyDead == false){
