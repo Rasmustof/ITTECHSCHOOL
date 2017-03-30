@@ -17,3 +17,10 @@ small programs designed to showcase how to use the programming language to its f
 
 Gravity:
 using Gravitational calculations to have a ball bounce acording to real world like physics
+
+Smiley Game:
+working with jumping and collision between images
+
+Smiley World:
+Platformer using Images and objects to create a random playing area (also scaling depending on screen size) 
+Planned changes: scrolling upwards so the game will keep going untill the player falls off
