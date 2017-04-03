@@ -40,21 +40,21 @@ void setup() {
   
   p = new Player(width/10,height/1.05-((height/10.8)/2),height/10.8,0,width/384,height/216,0,50,false,true,false,false);
   
-  for(int i = 0; i< platformCount;i++){
-  Platform plat = new Platform(width/2,height/1.14285714);
+  for(int i = 0; i< plats.length;i++){
+  Platform plat = new Platform(width/2,660);
   plats[i] = plat;
   }
 }
 
 
 void draw() {
-  //  println(height);
   background(255);
   drawHLine();
   p.smileyControl();
   p.smileyBouncing();
   p.smileyGravity();
   p.smileyMoving();
+  
   for(int i = 0; i< plats.length;i++){
   plats[i].drawPlatform();
   }

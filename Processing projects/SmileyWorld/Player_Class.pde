@@ -96,6 +96,7 @@ class Player {
 
     //   ---platform collision---
     for ( int i = 0; i< platformCount; i++) {
+      //top side collision
       if (smileyY+(smileyDiameter/2) > plats[i].platY && smileyY+(smileyDiameter/2) < plats[i].platY +5) {
         if (smileyX+(smileyDiameter/2) > plats[i].platX && smileyX-(smileyDiameter/2) < plats[i].platX+plats[i].platW) {
           smileySpeedY *=0;
@@ -104,10 +105,12 @@ class Player {
           smileyCanJump=true;
           smileyJump = false;
         }
-      } else if (smileyY-(smileyDiameter/2) > plats[i].platY+plats[i].platH && smileyY-(smileyDiameter/2) < plats[i].platY + plats[i].platH +5) {
+      }
+      //buttom colission
+      else if (smileyY-(smileyDiameter/2) > plats[i].platY+plats[i].platH && smileyY-(smileyDiameter/2) < plats[i].platY + plats[i].platH +5) {
         if (smileyX+(smileyDiameter/2) > plats[i].platX && smileyX-(smileyDiameter/2) < plats[i].platX+plats[i].platW) {
-          smileySpeedY *=0;
-          smileyY=groundLineY-(smileyDiameter/2);
+          smileySpeedY =0;
+       //   smileyY=groundLineY-(smileyDiameter/2);
           smileySpeedY+=gravity;
         }
       }
