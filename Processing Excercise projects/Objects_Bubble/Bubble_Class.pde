@@ -8,16 +8,16 @@ class Bubble {
     diameter = 60;
     atTop = false;
   }
-  void display(){
-    ellipse(x,y,diameter,diameter);
+  void display() {
+    ellipse(x, y, diameter, diameter);
   }
-  void ascend(){
-    if(!atTop){
+  void ascend() {
+    if (!atTop) {
       y--;
     }
   }
-  void top(){
-    if (y <= 0){
+  void top() {
+    if (y <= 0) {
       atTop = true;
     }
   }
