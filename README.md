@@ -24,3 +24,4 @@ working with jumping and collision between images
 Smiley World:
 Platformer using Images and objects to create a random playing area (also scaling depending on screen size) 
 Planned changes: scrolling upwards so the game will keep going untill the player falls off
+Also now Showcasing Arrays and Objects .. yay
