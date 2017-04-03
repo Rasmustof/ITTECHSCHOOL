@@ -24,10 +24,16 @@ boolean keys[] = new boolean[526];
 
 //PLAYING GROUND
 float groundLineY;
+
 float platformX;
-float platformY;
+float platformY1;
 float platformWidth;
 float platformHeight;
+int platformCount = 8;
+float platformSpacing;
+float platformY[] = new float[platformCount];
+boolean hasPrintedArray = false;
+
 
 
 
@@ -35,24 +41,25 @@ void setup() {
   neutralSmiley = loadImage("neutralSmiley.png");
   deadSmiley = loadImage("deadSmiley.png");
   happySmiley = loadImage("happySmiley.png");
- fullScreen();
- // size(800, 500);
+  //fullScreen();
+  size(800, 800);
   background(255);
   frameRate(60);
   imageMode(CENTER); 
-  
+
   //Variable depending of screen size - Updating
   gravity = height*0.00004629629;
-  println(gravity);
+  //println(gravity);
   smileyX =width/10;
   smileyY =height;
   smileyDiameter = height/10.8;
   platformX = width/2;
-  platformY = height/1.2;
+  platformY1 = height/1.2;
   platformWidth = width/12.8;
   platformHeight = height/54;
   smileyJumpSpeed = height/216;
   smileySpeedX = width/384;
+  platformSpacing = height/platformCount;
 }
 
 
@@ -60,13 +67,12 @@ void draw() {
   //  println(height);
   background(255);
   drawHLine();
-  drawPlatform();
   smileyControl();
   smileyBouncing();
   smileyGravity();
   smileyMoving();
   keyChecker();
-  
+  drawPlatform();
 }
 void smileyControl() {
   //SMILEY JUMP CONTROL
@@ -105,14 +111,14 @@ void drawSmiley(String state) {
 
   switch(state) {
     case("alive"):
-       image(neutralSmiley, smileyX, smileyY, smileyDiameter, smileyDiameter);
-      break;
+    image(neutralSmiley, smileyX, smileyY, smileyDiameter, smileyDiameter);
+    break;
     case("dead"):
-      image(deadSmiley, smileyX, smileyY, smileyDiameter, smileyDiameter);
-      break;
+    image(deadSmiley, smileyX, smileyY, smileyDiameter, smileyDiameter);
+    break;
     case("happy"):
-      image(happySmiley, smileyX, smileyY, smileyDiameter, smileyDiameter);
-      break;
+    image(happySmiley, smileyX, smileyY, smileyDiameter, smileyDiameter);
+    break;
   }
 }
 void smileyBouncing() {
@@ -120,17 +126,21 @@ void smileyBouncing() {
     smileySpeedY *=0;
     smileyY=groundLineY-(smileyDiameter/2);
     smileySpeedY+=gravity;
-  }
-  else if(smileyY+(smileyDiameter/2) > platformY && smileyY+(smileyDiameter/2) < platformY +5){
-    if(smileyX+(smileyDiameter/2) > platformX && smileyX-(smileyDiameter/2) < platformX+platformWidth){
-     smileySpeedY *=0;
-    smileyY=platformY-(smileyDiameter/2);
-    smileySpeedY+=gravity;
-    smileyCanJump=true;
-    smileyJump = false;
+  } else if (smileyY+(smileyDiameter/2) > platformY1 && smileyY+(smileyDiameter/2) < platformY1 +5) {
+    if (smileyX+(smileyDiameter/2) > platformX && smileyX-(smileyDiameter/2) < platformX+platformWidth) {
+      smileySpeedY *=0;
+      smileyY=platformY1-(smileyDiameter/2);
+      smileySpeedY+=gravity;
+      smileyCanJump=true;
+      smileyJump = false;
     }
-   
-  }
+  } else if (smileyY-(smileyDiameter/2) > platformY1+platformHeight && smileyY-(smileyDiameter/2) < platformY1 + platformHeight +5) {
+    if (smileyX+(smileyDiameter/2) > platformX && smileyX-(smileyDiameter/2) < platformX+platformWidth) {
+      smileySpeedY *=0;
+      smileyY=groundLineY-(smileyDiameter/2);
+      smileySpeedY+=gravity;
+    }
+  } 
 }
 
 void smileyMoving() {
@@ -155,11 +165,21 @@ void drawHLine() {
   stroke(0);
   line(0, groundLineY, width, groundLineY);
 }
-void drawPlatform(){
+ void drawPlatform() {
   fill(0);
-  rect(platformX,platformY,platformWidth,platformHeight);
+  for(int i = 0; i < platformCount; i++){
+    float _y = platformY1 - (i*platformSpacing);
+    fill(0,0,0,200);
+    rect(platformX,_y , platformWidth, platformHeight);
+    platformY[i] = _y;
+    
+  }
+    if(!hasPrintedArray){
+      printArray(platformY);
+      hasPrintedArray = true;
+    }
+ 
 }
-
 void keyChecker() {
 
   if (checkKey("SPACE")) {
