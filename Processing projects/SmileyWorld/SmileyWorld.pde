@@ -18,7 +18,8 @@ boolean keys[] = new boolean[526];
 float groundLineY;
 PImage lava;
 int coinAmount = 5;
-Coin[] c = new Coin[coinAmount];
+int coinsRemaining = coinAmount;
+Coin[] c = new Coin[coinsRemaining];
 
 
 //PLATFORMS
@@ -82,6 +83,7 @@ void draw() {
   for (int i = 0; i< plats.length; i++) {
     plats[i].drawPlatform();
   }
+  //COINS
   for (int i = 0; i< c.length;i++){
     c[i].drawCoin();
   }
@@ -92,6 +94,7 @@ void draw() {
   p.smileyGravity();
   p.smileyMoving();
   p.startOfGame();
+  p.smileyEating();
 
 
 
@@ -99,6 +102,7 @@ void draw() {
   keyChecker();
   checkLost();
   checkWin();
+  drawUI();
 
   //println(gameStarted);
 }
@@ -143,6 +147,11 @@ void keyChecker() {
       p.smileyDead = false;
       gameStarted = false;
       p.smileyY = groundLineY-(p.smileyDiameter/2);
+      coinsRemaining = coinAmount;
+        for(int i = 0; i< c.length; i++){
+          c[i].coinEaten = false;
+        }
+      
     }
     // HAS THE SMILEY WON??
     if (p.smileyWin && !p.smileyDead) {
@@ -150,6 +159,11 @@ void keyChecker() {
       p.smileyWin = false;
       gameStarted = false;
       p.smileyY = groundLineY-(p.smileyDiameter/2);
+      gravity = height*0.00004629629;
+      coinsRemaining = coinAmount;
+      for(int i = 0; i< c.length; i++){
+          c[i].coinEaten = false;
+        }
     }
   }
 }
@@ -172,7 +186,12 @@ void checkWin() {
   }
 }
 
-
+void drawUI(){
+  textSize(width/15);
+  fill(0);
+  textAlign(CORNER);
+  text("Coins Remaining: " + coinsRemaining,10,100);
+}
 void keyPressed()
 { 
   keys[keyCode] = true;

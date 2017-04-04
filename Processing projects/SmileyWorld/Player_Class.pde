@@ -139,13 +139,25 @@ class Player {
     smileySpeedY +=gravity;
   }
   void startOfGame() {
-    if (gameStarted && smileyY >= groundLineY-(smileyDiameter/2)) {
+    if (gameStarted && smileyY >= groundLineY-(smileyDiameter/2) && !smileyWin) {
       smileyDead = true;
     }
-    else if(gameStarted && smileyY <= plats[plats.length-1].platY && smileyX > plats[plats.length-1].platX && smileyX < plats[plats.length-1].platX + plats[plats.length-1].platW){
+    //else if(gameStarted && smileyY <= plats[plats.length-1].platY && smileyX > plats[plats.length-1].platX && smileyX < plats[plats.length-1].platX + plats[plats.length-1].platW){
+    //  smileyWin = true;
+    //}
+    else if(gameStarted && coinsRemaining <= 0 && !smileyDead){
       smileyWin = true;
+      smileySpeedY *= 0;
+      gravity = 0;
+      
     }
   }
- 
+ void smileyEating(){
+   for(int i = 0; i< c.length;i++){
+     if( c[i].collideCoin(this)){
+       c[i].coinEaten = true;
+     }
+   }
+ }
    
 }
