@@ -16,6 +16,8 @@ boolean keys[] = new boolean[526];
 
 //PLAYING GROUND
 float groundLineY;
+PImage lava;
+
 
 //PLATFORMS
 int platformCount = 8;
@@ -30,73 +32,75 @@ void setup() {
   neutralSmiley = loadImage("neutralSmiley.png");
   deadSmiley = loadImage("deadSmiley.png");
   happySmiley = loadImage("happySmiley.png");
+  lava = loadImage("lava.png");
+ 
   fullScreen();
- // size(800, 800);
+  // size(800, 800);
   background(255);
   frameRate(60);
   imageMode(CENTER); 
 
   //Variable depending of screen size - Updating
   gravity = height*0.00004629629;
-  platformSpacing = height/platformCount;
+  platformSpacing =- height/platformCount;
   platform1X = width/2;
 
   //Initializing Objects
   p = new Player(width/10, height/1.05-((height/10.8)/2), height/10.8, 0, width/100, height/216, 0, 50, false, true, false, false);
 
   for (int i = 0; i< plats.length; i++) {
-    if ( i == 0) {
-      Platform plat = new Platform(platform1X, platformSpacing);
-      plats[i] = plat;
-    } else {
+    
       //Platform plat = new Platform(random(plats[i-1].platX-150,plats[i-1].platX+150),i*platformSpacing+platformSpacing);
-      Platform plat = new Platform(random(0, width-p.smileyDiameter), i*platformSpacing+platformSpacing);
+      Platform plat = new Platform(random(0, width-p.smileyDiameter), i*platformSpacing-platformSpacing+height);
       plats[i] = plat;
-    }
+    
     // println(plats[i].platX, plats[i].platY);
   }
 }
 
 
 void draw() {
-  background(255);
-  
- //GROUND
+
+  //Graphics and ground
+   background(#D3D3D3);
+  image(lava,width/2,height-26);
   drawHLine();
-  
+
+
   //PLATFORMS
-   for (int i = 0; i< plats.length; i++) {
+  for (int i = 0; i< plats.length; i++) {
     plats[i].drawPlatform();
   }
-  
+
   //SMILEY
   p.smileyControl();
   p.smileyBouncing();
   p.smileyGravity();
   p.smileyMoving();
   p.startOfGame();
-  
 
- 
-//GAME LOGIC
+
+
+  //GAME LOGIC
   keyChecker();
   checkLost();
   checkWin();
-  
+
   //println(gameStarted);
 }
 
 void drawHLine() {
   groundLineY = height/1.05;
-  strokeWeight(2);
-  stroke(0);
-  line(0, groundLineY, width, groundLineY);
+  if(!gameStarted){
+    strokeWeight(50);
+    stroke(#9D9D9D);
+    line(0, groundLineY, width, groundLineY);
+  }
 }
 
 
-
 void keyChecker() {
-  if (!p.smileyDead) {
+  if (!p.smileyDead && !p.smileyWin) {
 
     if (checkKey("SPACE")) {
       if (p.smileyDead == false && p.smileyCanJump) {
@@ -118,42 +122,41 @@ void keyChecker() {
         p.smileyX -= p.smileySpeedX;
       }
     }
-    
-  } if (checkKey("r")) {
+  } 
+  if (checkKey("r")) {
     //IS SMILEY DEAD??
-      if (p.smileyDead) {
-        p.smileyDead = false;
-        gameStarted = false;
-        p.smileyY = groundLineY-(p.smileyDiameter/2);
-       
-      }
-     // HAS THE SMILEY WON??
-      if(p.smileyWin && !p.smileyDead){
-       // println("smiley Won");
-        p.smileyWin = false;
-        gameStarted = false;
-        p.smileyY = groundLineY-(p.smileyDiameter/2);
-      }
+    if (p.smileyDead) {
+      p.smileyDead = false;
+      gameStarted = false;
+      p.smileyY = groundLineY-(p.smileyDiameter/2);
     }
+    // HAS THE SMILEY WON??
+    if (p.smileyWin && !p.smileyDead) {
+      // println("smiley Won");
+      p.smileyWin = false;
+      gameStarted = false;
+      p.smileyY = groundLineY-(p.smileyDiameter/2);
+    }
+  }
 }
-void checkLost(){
+void checkLost() {
   //println(p.smileyDead);
- if(p.smileyDead){
-   textSize(width/10);
-   fill(#F00000);
-   textAlign(CENTER);
-   text("YOU DIED",width/2,height/2);
- }
- //println(p.smileyDead);
-}
-void checkWin(){
-    if(p.smileyWin == true){
+  if (p.smileyDead) {
     textSize(width/10);
-   fill(#27F000);
-   textAlign(CENTER);
-   text("YOU WIN",width/2,height/2);
+    fill(#F00000);
+    textAlign(CENTER);
+    text("YOU DIED", width/2, height/2);
   }
+  //println(p.smileyDead);
+}
+void checkWin() {
+  if (p.smileyWin == true) {
+    textSize(width/10);
+    fill(#27F000);
+    textAlign(CENTER);
+    text("YOU WIN", width/2, height/2);
   }
+}
 
 
 void keyPressed()

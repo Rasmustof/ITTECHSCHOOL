@@ -142,9 +142,10 @@ class Player {
     if (gameStarted && smileyY >= groundLineY-(smileyDiameter/2)) {
       smileyDead = true;
     }
-    else if(gameStarted && smileyY <= plats[0].platY){
+    else if(gameStarted && smileyY <= plats[plats.length-1].platY && smileyX > plats[plats.length-1].platX && smileyX < plats[plats.length-1].platX + plats[plats.length-1].platW){
       smileyWin = true;
     }
   }
-  
+ 
+   
 }
