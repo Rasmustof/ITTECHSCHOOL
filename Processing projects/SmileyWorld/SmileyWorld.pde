@@ -17,6 +17,8 @@ boolean keys[] = new boolean[526];
 //PLAYING GROUND
 float groundLineY;
 PImage lava;
+int coinAmount = 5;
+Coin[] c = new Coin[coinAmount];
 
 
 //PLATFORMS
@@ -47,6 +49,15 @@ void setup() {
 
   //Initializing Objects
   p = new Player(width/10, height/1.05-((height/10.8)/2), height/10.8, 0, width/100, height/216, 0, 50, false, true, false, false);
+  
+  for (int i = 0; i<c.length;i++){
+    Coin coin = new Coin(random(0,width),random(20,height -20));
+    c[i] = coin;
+  }
+  
+  
+  
+  
 
   for (int i = 0; i< plats.length; i++) {
     
@@ -70,6 +81,9 @@ void draw() {
   //PLATFORMS
   for (int i = 0; i< plats.length; i++) {
     plats[i].drawPlatform();
+  }
+  for (int i = 0; i< c.length;i++){
+    c[i].drawCoin();
   }
 
   //SMILEY
