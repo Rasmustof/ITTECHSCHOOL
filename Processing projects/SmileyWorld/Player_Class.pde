@@ -11,6 +11,10 @@ class Player {
   boolean smileyCanJump; 
   boolean smileyDead; 
   boolean smileyShouldJump;
+  boolean smileyWin = false;
+
+  int StartDelayTime = 0;
+  int StartDelayMax = 50;
 
   Player(float _smileyX, 
     float _smileyY, 
@@ -110,8 +114,9 @@ class Player {
       else if (smileyY-(smileyDiameter/2) > plats[i].platY+plats[i].platH && smileyY-(smileyDiameter/2) < plats[i].platY + plats[i].platH +5) {
         if (smileyX+(smileyDiameter/2) > plats[i].platX && smileyX-(smileyDiameter/2) < plats[i].platX+plats[i].platW) {
           smileySpeedY =0;
-       //   smileyY=groundLineY-(smileyDiameter/2);
+          smileyY=plats[i].platY+(smileyDiameter/2)+19;
           smileySpeedY+=gravity;
+          //smileySpeedY *= -1;
         }
       }
     }
@@ -133,4 +138,13 @@ class Player {
   void smileyGravity() {
     smileySpeedY +=gravity;
   }
+  void startOfGame() {
+    if (gameStarted && smileyY >= groundLineY-(smileyDiameter/2)) {
+      smileyDead = true;
+    }
+    else if(gameStarted && smileyY <= plats[0].platY){
+      smileyWin = true;
+    }
+  }
+  
 }

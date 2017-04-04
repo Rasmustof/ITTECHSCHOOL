@@ -8,7 +8,7 @@ class Platform {
 
 
   Platform( float _x, float _y) {
-    platW = width/12.8;
+    platW = width/(12.8/2);
     platH = height/54;
     platX = _x;
     platY = _y;
