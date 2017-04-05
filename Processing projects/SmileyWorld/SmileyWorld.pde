@@ -163,6 +163,8 @@ void keyChecker() {
       coinsRemaining = coinAmount;
       for(int i = 0; i< c.length; i++){
           c[i].coinEaten = false;
+          c[i].coinX = random(0,width);
+          c[i].coinY = random(20,height -20);
         }
     }
   }
