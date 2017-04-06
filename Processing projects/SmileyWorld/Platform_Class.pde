@@ -14,10 +14,8 @@ class Platform {
     platY = _y;
   }
   void drawPlatform() {
-      noStroke();
-      fill(0);
-      rect(platX, platY, platW, platH);
-    
+    noStroke();
+    fill(0);
+    rect(platX, platY, platW, platH);
   }
-
 }

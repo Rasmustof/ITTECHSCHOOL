@@ -36,7 +36,7 @@ void setup() {
   deadSmiley = loadImage("deadSmiley.png");
   happySmiley = loadImage("happySmiley.png");
   lava = loadImage("lava.png");
- 
+
   fullScreen();
   // size(800, 800);
   background(255);
@@ -50,22 +50,22 @@ void setup() {
 
   //Initializing Objects
   p = new Player(width/10, height/1.05-((height/10.8)/2), height/10.8, 0, width/100, height/216, 0, 50, false, true, false, false);
-  
-  for (int i = 0; i<c.length;i++){
-    Coin coin = new Coin(random(0,width),random(20,height -20));
+
+  for (int i = 0; i<c.length; i++) {
+    Coin coin = new Coin(random(0, width), random(20, height -20));
     c[i] = coin;
   }
-  
-  
-  
-  
+
+
+
+
 
   for (int i = 0; i< plats.length; i++) {
-    
-      //Platform plat = new Platform(random(plats[i-1].platX-150,plats[i-1].platX+150),i*platformSpacing+platformSpacing);
-      Platform plat = new Platform(random(0, width-p.smileyDiameter), i*platformSpacing-platformSpacing+height);
-      plats[i] = plat;
-    
+
+    //Platform plat = new Platform(random(plats[i-1].platX-150,plats[i-1].platX+150),i*platformSpacing+platformSpacing);
+    Platform plat = new Platform(random(0, width-p.smileyDiameter), i*platformSpacing-platformSpacing+height);
+    plats[i] = plat;
+
     // println(plats[i].platX, plats[i].platY);
   }
 }
@@ -74,8 +74,8 @@ void setup() {
 void draw() {
 
   //Graphics and ground
-   background(#D3D3D3);
-  image(lava,width/2,height-26);
+  background(#D3D3D3);
+  image(lava, width/2, height-26);
   drawHLine();
 
 
@@ -84,7 +84,7 @@ void draw() {
     plats[i].drawPlatform();
   }
   //COINS
-  for (int i = 0; i< c.length;i++){
+  for (int i = 0; i< c.length; i++) {
     c[i].drawCoin();
   }
 
@@ -109,7 +109,7 @@ void draw() {
 
 void drawHLine() {
   groundLineY = height/1.05;
-  if(!gameStarted){
+  if (!gameStarted) {
     strokeWeight(50);
     stroke(#9D9D9D);
     line(0, groundLineY, width, groundLineY);
@@ -148,10 +148,9 @@ void keyChecker() {
       gameStarted = false;
       p.smileyY = groundLineY-(p.smileyDiameter/2);
       coinsRemaining = coinAmount;
-        for(int i = 0; i< c.length; i++){
-          c[i].coinEaten = false;
-        }
-      
+      for (int i = 0; i< c.length; i++) {
+        c[i].coinEaten = false;
+      }
     }
     // HAS THE SMILEY WON??
     if (p.smileyWin && !p.smileyDead) {
@@ -161,11 +160,11 @@ void keyChecker() {
       p.smileyY = groundLineY-(p.smileyDiameter/2);
       gravity = height*0.00004629629;
       coinsRemaining = coinAmount;
-      for(int i = 0; i< c.length; i++){
-          c[i].coinEaten = false;
-          c[i].coinX = random(0,width);
-          c[i].coinY = random(20,height -20);
-        }
+      for (int i = 0; i< c.length; i++) {
+        c[i].coinEaten = false;
+        c[i].coinX = random(0, width);
+        c[i].coinY = random(20, height -20);
+      }
     }
   }
 }
@@ -188,11 +187,11 @@ void checkWin() {
   }
 }
 
-void drawUI(){
+void drawUI() {
   textSize(width/15);
   fill(0);
   textAlign(CORNER);
-  text("Coins Remaining: " + coinsRemaining,10,100);
+  text("Coins Remaining: " + coinsRemaining, 10, 100);
 }
 void keyPressed()
 { 
