@@ -2,6 +2,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 float gravity;
+float wins = 0;
+float loss = 0;
 
 //SMILEY
 Player p;
@@ -56,17 +58,11 @@ void setup() {
     c[i] = coin;
   }
 
-
-
-
-
   for (int i = 0; i< plats.length; i++) {
 
-    //Platform plat = new Platform(random(plats[i-1].platX-150,plats[i-1].platX+150),i*platformSpacing+platformSpacing);
     Platform plat = new Platform(random(0, width-p.smileyDiameter), i*platformSpacing-platformSpacing+height);
     plats[i] = plat;
 
-    // println(plats[i].platX, plats[i].platY);
   }
 }
 
@@ -144,6 +140,7 @@ void keyChecker() {
   if (checkKey("r")) {
     //IS SMILEY DEAD??
     if (p.smileyDead) {
+      loss++;
       p.smileyDead = false;
       gameStarted = false;
       p.smileyY = groundLineY-(p.smileyDiameter/2);
@@ -156,6 +153,7 @@ void keyChecker() {
     }
     // HAS THE SMILEY WON??
     if (p.smileyWin && !p.smileyDead) {
+      wins++;
       // println("smiley Won");
       p.smileyWin = false;
       gameStarted = false;
@@ -190,10 +188,11 @@ void checkWin() {
 }
 
 void drawUI() {
-  textSize(width/15);
+  textSize(width/40);
   fill(0);
   textAlign(CORNER);
-  text("Coins Remaining: " + coinsRemaining, 10, 100);
+  text("Coins Remaining: " + coinsRemaining, 10, 60);
+  text("Win Percentage: " + (wins/(wins+loss))*100 + " %" , width/1.65,60);
 }
 void keyPressed()
 { 
