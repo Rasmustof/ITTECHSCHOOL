@@ -2,9 +2,9 @@ class Shot {
 
   float x;
   float y;
-  float w = 2;
-  float h = 7;
-  float speed = 10;
+  float w = 4;
+  float h = 10;
+  float speed = 7.5;
 
 
   Shot(float _x, float _y) {

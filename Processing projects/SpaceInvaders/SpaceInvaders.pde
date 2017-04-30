@@ -4,6 +4,7 @@ import java.awt.event.KeyListener;
 
 //Player
 Player p;
+EnemyManager enemyMan;
 boolean isPlayerDead = false;
 
 //KEY CHECKING
@@ -14,6 +15,8 @@ void setup() {
 
   size(500, 500);
   p = new Player(1);
+  enemyMan = new EnemyManager(1);
+  
 }
 
 void draw() {
@@ -22,6 +25,7 @@ void draw() {
   keyChecker();
   p.drawPlayer();
   playerDeadControl();
+  enemyMan.drawEnemies();
   p.handleShots();
     
   
@@ -31,6 +35,8 @@ void playerDeadControl() {
     isPlayerDead = true;
   } else isPlayerDead = false;
 }
+
+
 void keyChecker() {
     if (checkKey("SPACE")) {
       //SHOOT
