@@ -29,7 +29,7 @@ class EnemyManager {
       enemies[i].drawEnemy();
 
       //Testing
-      //println("EnemyNumber: " + i +" , "+"Sprite ID: " + enemies[i].ID);
+      println("EnemyNumber: " + i +" , "+"Sprite ID: " + enemies[i].ID + " , " + "Enemy Health: " + enemies[i].enemyHealth);
     }
   }
 }
