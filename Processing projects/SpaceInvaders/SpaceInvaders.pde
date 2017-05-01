@@ -1,7 +1,6 @@
 import java.awt.event.KeyEvent; 
 import java.awt.event.KeyListener;
 
-
 //Player
 Player p;
 EnemyManager enemyMan;
@@ -15,8 +14,7 @@ void setup() {
 
   size(500, 500);
   p = new Player(1);
-  enemyMan = new EnemyManager(1);
-  
+  enemyMan = new EnemyManager(5);
 }
 
 void draw() {
@@ -27,8 +25,6 @@ void draw() {
   playerDeadControl();
   enemyMan.drawEnemies();
   p.handleShots();
-    
-  
 }
 void playerDeadControl() {
   if (p.type == 0) {
@@ -38,19 +34,18 @@ void playerDeadControl() {
 
 
 void keyChecker() {
-    if (checkKey("SPACE")) {
-      //SHOOT
-      p.shoot();
-    }
-    if (checkKey("RIGHT")) {
-      p.move(1);
-    }
-    if (checkKey("LEFT")) {
-      p.move(0);
-    }
-    if (checkKey("r")) {
-    }
-  
+  if (checkKey("SPACE")) {
+    //SHOOT
+    p.shoot();
+  }
+  if (checkKey("RIGHT")) {
+    p.move(1);
+  }
+  if (checkKey("LEFT")) {
+    p.move(0);
+  }
+  if (checkKey("r")) {
+  }
 }
 
 void keyPressed()

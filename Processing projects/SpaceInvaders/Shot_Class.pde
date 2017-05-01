@@ -6,13 +6,12 @@ class Shot {
   float h = 10;
   float speed = 7.5;
 
-
   Shot(float _x, float _y) {
     x= _x;
     y= _y;
   }
   void drawShot() {
-   // noStroke();
+    //noStroke();
     fill(#2FFA08);
     rect(x, y, w, h);
   }

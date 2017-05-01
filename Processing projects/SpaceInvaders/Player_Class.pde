@@ -17,7 +17,6 @@ class Player {
 
     if (type == 0) {
       //DEAD
-      
     }
     if (type == 1) {
       //Alive
@@ -42,18 +41,16 @@ class Player {
     }
   }
   void shoot() {
-   if(!hasShot){
+    if (!hasShot) {
       s = new Shot(x, y-25); 
       hasShot = true;
-   }
+    }
   }
   void handleShots() {
     //println("Shots: "+shotCount);
-    if(hasShot){
+    if (hasShot) {
       s.drawShot(); 
       s.moveShot();
-      
-      }
-    
+    }
   }
 }
