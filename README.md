@@ -25,3 +25,9 @@ Smiley World:
 Platformer using Images and objects to create a random playing area (also scaling depending on screen size) 
 Planned changes: scrolling upwards so the game will keep going untill the player falls off
 Also now Showcasing Arrays and Objects .. yay
+
+Space Invaders: 
+An Attempt to recreate Space invaders with todays programming
+
+Race Game:
+Simple car game with a 2-lane road... a stone will spawn on a random lane, and when it dissapears below the car, a new will appear
