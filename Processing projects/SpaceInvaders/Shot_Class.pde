@@ -23,4 +23,12 @@ class Shot {
       y -= speed;
     }
   }
+  void shotCollide(){
+   for(int i = 0; i < enemyMan.enemyCount; i++){
+     if(x >= enemyMan.enemies[i].x - (35/2) && x <= enemyMan.enemies[i].x + (35/2)  && y <= enemyMan.enemies[i].y+(35/2) && y >= enemyMan.enemies[i].y-(35/2)){
+       //println("SHOT A ENEMY!!");
+        enemyMan.enemies[i].enemyHealth--;
+     }
+   } 
+  }
 }

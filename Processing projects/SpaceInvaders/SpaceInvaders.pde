@@ -9,42 +9,62 @@ boolean isPlayerDead = false;
 //KEY CHECKING
 boolean keys[] = new boolean[526];
 
+//STATES
+int state = 0;
+Intro intro;
+Play play;
+End end;
+int currentEnd = 0;
+
 
 void setup() {
 
   size(500, 500);
   p = new Player(1);
   enemyMan = new EnemyManager(5);
+  intro = new Intro();
+  play = new Play();
+  end = new End(currentEnd);
 }
 
 void draw() {
-
-  background(0);
   keyChecker();
-  p.drawPlayer();
-  playerDeadControl();
-  enemyMan.drawEnemies();
-  p.handleShots();
+  
+  switch(state) {
+    case(0):
+      intro.drawIntro();
+      break;
+
+    case(1):
+      play.playGame();
+      break;
+    
+    default:
+      println(currentEnd);
+      currentEnd = end.ID;
+      end.stateChange();
+      
+  }
+ 
 }
-void playerDeadControl() {
-  if (p.type == 0) {
-    isPlayerDead = true;
-  } else isPlayerDead = false;
-}
+
 
 
 void keyChecker() {
-  if (checkKey("SPACE")) {
-    //SHOOT
-    p.shoot();
+  if (state == 0 && keyPressed) {
+    state = 1;
   }
-  if (checkKey("RIGHT")) {
-    p.move(1);
-  }
-  if (checkKey("LEFT")) {
-    p.move(0);
-  }
-  if (checkKey("r")) {
+  if (state == 1) {
+    if (checkKey("SPACE")) {
+      //SHOOT
+      p.shoot();
+    }
+    if (checkKey("RIGHT")) {
+      p.move(1);
+    }
+    if (checkKey("LEFT")) {
+      p.move(0);
+    }
   }
 }
 

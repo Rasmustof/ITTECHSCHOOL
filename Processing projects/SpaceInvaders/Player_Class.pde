@@ -51,6 +51,7 @@ class Player {
     if (hasShot) {
       s.drawShot(); 
       s.moveShot();
+      s.shotCollide();
     }
   }
 }
