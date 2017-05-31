@@ -16,10 +16,10 @@ class EnemyShot {
     fill(#E52020);
     rect(x, y, w, h);
   }
-  void moveEnemyShot() {  
+  void moveEnemyShot(Enemy e) {  
  if (y >= height) {
       //no more shot
-      p.hasShot = false;
+      e.hasEnemyShot = false;
     } else {
       y += speed;
     }

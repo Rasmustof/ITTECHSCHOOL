@@ -32,7 +32,7 @@ class EnemyManager {
       //This actually draws our new enemy, so we can see it :D
       enemies[i].drawEnemy();
       enemies[i].isAlive();
-      enemies[i].shoot();
+      enemies[i].enemyShoot();
       enemies[i].handleShots();
 
       //Testing

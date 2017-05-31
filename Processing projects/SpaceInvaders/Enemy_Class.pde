@@ -7,7 +7,7 @@ class Enemy {
   boolean hasJumped = false;
   boolean isAlive = true;
   boolean hasDied = false;
-  boolean hasShot = false;
+  boolean hasEnemyShot = false;
   
   EnemyShot eS;
 
@@ -42,21 +42,21 @@ class Enemy {
     }
   }
   void enemyShoot(){
-    if(!hasShot){
-      if((int)random(0,25) == 5){
+    if(!hasEnemyShot && isAlive){
+      if((int)random(0,50) == 5){
        // println("ENEMY TRYING TO SHOOT!");
         eS = new EnemyShot(x,y);
-        hasShot = true;
+        hasEnemyShot = true;
       }
       
     }
   }
   void handleShots() {
-    if (hasShot) {
-      //n("WE HAVE A GODDAMN SHOT");
-      eS.drawShot(); 
-      eS.moveShot();
-      eS.shotCollide();
+    if (hasEnemyShot) {
+      //println("WE HAVE A GODDAMN SHOT");
+      eS.drawEnemyShot(); 
+      eS.moveEnemyShot(this);
+      eS.enemyShotCollide();
     }
  
   }
